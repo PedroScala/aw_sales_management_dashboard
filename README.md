@@ -1,13 +1,14 @@
 Data Analysis Project - Sales Management
 -----------------------------------------------------
 
-![](https://phscala.files.wordpress.com/2021/07/sales-overview-1.png)
+![Sales Overview](https://phscala.files.wordpress.com/2021/07/sales-overview-1.png?w=600)
 
-![](https://phscala.files.wordpress.com/2021/07/data_model-2.png)
+![Data Model](https://phscala.files.wordpress.com/2021/07/data_model-2.png?w=600)
 
-![](https://phscala.files.wordpress.com/2021/07/dim-customer-csv-excel-2.png)
+![Dim Customer CSV Excel](https://phscala.files.wordpress.com/2021/07/dim-customer-csv-excel-2.png?w=600)
 
-![](https://phscala.files.wordpress.com/2021/07/sql-calendar-project-1-2.png)
+![SQL Calendar Project](https://phscala.files.wordpress.com/2021/07/sql-calendar-project-1-2.png?w=600)
+
 
 1 - Introduction & Setup
 ----------------------
@@ -30,8 +31,6 @@ Business requirements and customer needs were established by the Sales Manager. 
 | 2   | Sales Representative     | Detailed view of internet sales per customer            | Monitor the customers who buy the most and identify potential for more sales | A dashboard that allows filtering by customer |
 | 3   | Sales Representative     | Detailed view of internet sales per product             | Monitor products with high sales performance               | A dashboard that allows filtering by product (category and subcategory) |
 | 4   | Sales Manager            | Produce a dashboard with an overview of internet sales  | Monitor sales and budget over time                          | A chart and a KPI that compare sales and budget over time |
-
-
 
 **Table 2.1 - Business and Customer Requirements**
 
