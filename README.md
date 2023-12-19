@@ -226,8 +226,8 @@ A dashboard containing an overview of Adventure Works internet sales was deliver
 **Figure 5.1 - Dashboards for Online Sales Management**
 
 <p float="left">
-  <img src="https://phscala.files.wordpress.com/2021/07/customer_details.png?w=600" />
-  <img src="https://phscala.files.wordpress.com/2021/07/porduct_details.png?w=600" />
+  <img src="https://phscala.files.wordpress.com/2021/07/customer_details.png?w=400" />
+  <img src="https://phscala.files.wordpress.com/2021/07/porduct_details.png?w=400" />
 </p>
 
 The Power BI file containing the produced dashboards is available on [my GitHub.](https://github.com/PedroScala/Projeto-de-Gerenciamento-de-Vendas-AW)
