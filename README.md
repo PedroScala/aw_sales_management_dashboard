@@ -24,12 +24,13 @@ For the ETL process, SQL Server was used. Power BI was used for data visualizati
 
 Business requirements and customer needs were established by the Sales Manager. Based on the employee's requirements, the table below was generated, containing acceptance criteria and details for panel production.
 
-| No # | Cargo                   | Demanda                                                | Objetivo                                                  | Critério de Aceitação                 |
+| No # | Position                | Demand                                                 | Objective                                                 | Acceptance Criteria                  |
 |-----|-------------------------|--------------------------------------------------------|-----------------------------------------------------------|--------------------------------------|
-| 1   | Gerente de Vendas        | Produzir painel com visão geral das vendas pela internet | Melhorar o acompanhamento sobre os melhores clientes e produtos | Um relatório que se atualiza diariamente |
-| 2   | Representante de Vendas | Visão detalhada das vendas pela internet por cliente    | Monitorar os clientes que mais compram e para quem é possível vender mais | Um painel que permita filtrar por cliente |
-| 3   | Representante de Vendas | Visão detalhada das vendas pela internet por produto    | Monitorar os produtos com alto desempenho em vendas        | Um painel que permita filtrar por produto (categoria e subcategoria) |
-| 4   | Gerente de Vendas        | Produzir painel com visão geral das vendas pela internet | Monitorar as vendas e orçamento ao longo do tempo         | Um gráfico e um KPI que compare as vendas e orçamento ao longo do tempo |
+| 1   | Sales Manager            | Produce a dashboard with an overview of internet sales  | Improve tracking of the best customers and products        | A report that updates daily          |
+| 2   | Sales Representative     | Detailed view of internet sales per customer            | Monitor the customers who buy the most and identify potential for more sales | A dashboard that allows filtering by customer |
+| 3   | Sales Representative     | Detailed view of internet sales per product             | Monitor products with high sales performance               | A dashboard that allows filtering by product (category and subcategory) |
+| 4   | Sales Manager            | Produce a dashboard with an overview of internet sales  | Monitor sales and budget over time                          | A chart and a KPI that compare sales and budget over time |
+
 
 
 **Table 2.1 - Business and Customer Requirements**
