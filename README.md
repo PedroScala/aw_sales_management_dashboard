@@ -1,4 +1,4 @@
-Projeto de Análise de Dados - Gerenciamento de Vendas
+Data Analysis Project - Sales Management
 -----------------------------------------------------
 
 ![](https://phscala.files.wordpress.com/2021/07/sales-overview-1.png)
@@ -9,21 +9,20 @@ Projeto de Análise de Dados - Gerenciamento de Vendas
 
 ![](https://phscala.files.wordpress.com/2021/07/sql-calendar-project-1-2.png)
 
-1 - Introdução & Setup
+1 - Introduction & Setup
 ----------------------
 
-Adventure Works é uma empresa fictícia. A AW é uma grande empresa de manufatura multinacional que produz e distribui bicicletas, peças de bicicleta e acessórios. Comercializa nos mercados Norte Americano, Europeu e Asiático. A empresa possui 500 funcionários. A AW possui diversos grupos de vendas.
+Adventure Works is a fictional company. AW is a large multinational manufacturing company that produces and distributes bicycles, bike parts, and accessories. It operates in the North American, European, and Asian markets. The company has 500 employees. AW has various sales groups.
 
-O link para download do Data Warehouse da AW se encontra abaixo.
+The link to download the AW Data Warehouse is below.
 
 **<https://docs.microsoft.com/pt-br/sql/samples/adventureworks-install-configure?view=sql-server-ver15&tabs=ssms>**
 
-Para a realização do processo de ETL foi utilizado o SQL Server. Para a visualização de dados foi utilizado o Power BI. O DB foi atualizado pela última vez em 2014. Para atualizar o DB foi utilizado um script em SQL disponível no meu [github.](https://github.com/PedroScala/Projeto-de-Gerenciamento-de-Vendas-AW)
+For the ETL process, SQL Server was used. Power BI was used for data visualization. The database was last updated in 2014. To update the database, a SQL script available on [my GitHub](https://github.com/PedroScala/Projeto-de-Gerenciamento-de-Vendas-AW) was used.
 
-2 - Requisitos de Negócios e Necessidades do Cliente
-----------------------------------------------------
+## 2 - Business Requirements and Customer Needs
 
-Os requisitos de negócio e necessidade do cliente foram estabelecidas pelo Gerente de Vendas. Baseado nas exigências do colaborador foi gerada a tabela abaixo que contêm os critérios de aceitação e detalhes para produção do painel.
+Business requirements and customer needs were established by the Sales Manager. Based on the employee's requirements, the table below was generated, containing acceptance criteria and details for panel production.
 
 | No # | Cargo                   | Demanda                                                | Objetivo                                                  | Critério de Aceitação                 |
 |-----|-------------------------|--------------------------------------------------------|-----------------------------------------------------------|--------------------------------------|
@@ -33,16 +32,14 @@ Os requisitos de negócio e necessidade do cliente foram estabelecidas pelo Gere
 | 4   | Gerente de Vendas        | Produzir painel com visão geral das vendas pela internet | Monitorar as vendas e orçamento ao longo do tempo         | Um gráfico e um KPI que compare as vendas e orçamento ao longo do tempo |
 
 
-Tabela 2.1 - Requisitos de Negócio e do Cliente
+**Table 2.1 - Business and Customer Requirements**
 
-3 - Limpeza e Transformação dos Dados (SQL)
--------------------------------------------
+## 3 - Data Cleaning and Transformation (SQL)
 
-Nessa etapa utilizei o SQL Server para acessar o DW e obter os dados necessarios para a produção do painel. Lembrando que os dados referente ao orçamento de venda estavam presente em uma planilha de Excel.
+In this stage, SQL Server was used to access the data warehouse and obtain the necessary data for panel production. Note that the sales budget data was present in an Excel spreadsheet.
 
-Abaixo é possível verificar os scripts criados para a extração e limpeza dos dados necessários. Algumas colunas foram deixadas como comentários para facilitar a inserção no modelo em futuras expansões ou melhoria nos relatórios.
+Below, you can see the scripts created for extracting and cleaning the necessary data. Some columns were left as comments to facilitate insertion into the model for future expansions or improvements in reports.
 
-* * * * *
 
 **DIM_Calendar:**
 -----------------
@@ -211,26 +208,24 @@ ORDER BY
   OrderDateKey ASC
 ```
 
-4 - Modelagem dos Dados
------------------------
+## 4 - Data Modeling
 
-Foi realizada a modelagem dos dados após a limpeza e importação das tabelas para o PowerBI. Na figura abaixo é possível verificar como a tabela FACT_Budget foi conectada a tabela FACT_InternetSales assim como as demais Tabelas Dimensão.
+Data modeling was performed after cleaning and importing the tables into PowerBI. In the figure below, you can see how the FACT_Budget table was connected to the FACT_InternetSales table, as well as the other Dimension Tables.
 
-![](https://phscala.files.wordpress.com/2021/07/data_model-3.png?w=1024)
+![Data Model](https://phscala.files.wordpress.com/2021/07/data_model-3.png?w=1024)
 
-Figura 4.1 - Modelo dos Dados
+**Figure 4.1 - Data Model**
 
-5 - Painel de Gerenciamento de Vendas
--------------------------------------
+## 5 - Sales Management Dashboard
 
-Como produto foi entregue uma Painel contendo uma visão geral das vendas via internet da Adventure Works. Foram adicionados outros dois painéis para fornecer mais informações e detalhes sobre as vendas por cliente e/ou produto.
+A dashboard containing an overview of Adventure Works internet sales was delivered as a product. Two additional dashboards were added to provide more information and details about sales by customer and/or product.
 
-![](https://phscala.files.wordpress.com/2021/07/sales-overview-2.png?w=1024)
+![Sales Overview](https://phscala.files.wordpress.com/2021/07/sales-overview-2.png?w=1024)
 
-Figura 5.1 - Painéis para Gerenciamento das Vendas Online
+**Figure 5.1 - Dashboards for Online Sales Management**
 
-![](https://phscala.files.wordpress.com/2021/07/customer_details.png?w=1024)
+![Customer Details](https://phscala.files.wordpress.com/2021/07/customer_details.png?w=1024)
 
-![](https://phscala.files.wordpress.com/2021/07/porduct_details.png?w=1024)
+![Product Details](https://phscala.files.wordpress.com/2021/07/porduct_details.png?w=1024)
 
-O arquivo do Power BI contendo os painéis produzidos está disponível no meu [Github.](https://github.com/PedroScala/Projeto-de-Gerenciamento-de-Vendas-AW)
+The Power BI file containing the produced dashboards is available on [my GitHub.](https://github.com/PedroScala/Projeto-de-Gerenciamento-de-Vendas-AW)
