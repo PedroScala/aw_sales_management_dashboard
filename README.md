@@ -1,108 +1,234 @@
-[Data Analysis Project - Sales Management
-1 - Introduction & Setup
-Adventure Works is a fictional company, a large multinational manufacturing company that produces and distributes bicycles, bike parts, and accessories. It operates in the North American, European, and Asian markets and has 500 employees. Adventure Works has various sales groups.
+Projeto de Análise de Dados - Gerenciamento de Vendas
+-----------------------------------------------------
 
-The link to download Adventure Works' Data Warehouse is provided below.
+![](https://phscala.files.wordpress.com/2021/07/sales-overview-1.png)
 
-Adventure Works Data Warehouse
+![](https://phscala.files.wordpress.com/2021/07/data_model-2.png)
 
-For the ETL process, SQL Server was used, and Power BI was used for data visualization. The database was last updated in 2014, and a SQL script from my GitHub was used to update it.
+![](https://phscala.files.wordpress.com/2021/07/dim-customer-csv-excel-2.png)
 
-2 - Business Requirements and Customer Needs
-Business requirements and customer needs were established by the Sales Manager. Based on the employee's requirements, the table below was generated, containing acceptance criteria and details for dashboard production.
+![](https://phscala.files.wordpress.com/2021/07/sql-calendar-project-1-2.png)
 
-#	Position	Demand	Objective	Acceptance Criteria
-1	Sales Manager	Produce a dashboard	Improve tracking of top customers and products	A report that updates daily
-2	Sales Representative	Detailed internet sales	Monitor top-buying customers and identify opportunities	A dashboard that allows filtering by customer
-3	Sales Representative	Detailed internet sales	Monitor high-performing products in sales	A dashboard that allows filtering by product (category and subcategory)
-4	Sales Manager	Produce a dashboard	Monitor internet sales and budget over time	A chart and a KPI comparing sales and budget over time
-3 - Data Cleaning and Transformation (SQL)
-In this stage, SQL Server was used to access the Data Warehouse and obtain the necessary data for dashboard production. The budget sales data were present in an Excel spreadsheet.
+1 - Introdução & Setup
+----------------------
 
-Below are the scripts created for extracting and cleaning the necessary data. Some columns were left as comments to facilitate insertion into the model for future expansions or report improvements.
+Adventure Works é uma empresa fictícia. A AW é uma grande empresa de manufatura multinacional que produz e distribui bicicletas, peças de bicicleta e acessórios. Comercializa nos mercados Norte Americano, Europeu e Asiático. A empresa possui 500 funcionários. A AW possui diversos grupos de vendas.
 
-DIM_Calendar:
-sql
-Copy code
+O link para download do Data Warehouse da AW se encontra abaixo.
+
+**<https://docs.microsoft.com/pt-br/sql/samples/adventureworks-install-configure?view=sql-server-ver15&tabs=ssms>**
+
+Para a realização do processo de ETL foi utilizado o SQL Server. Para a visualização de dados foi utilizado o Power BI. O DB foi atualizado pela última vez em 2014. Para atualizar o DB foi utilizado um script em SQL disponível no meu [github.](https://github.com/PedroScala/Projeto-de-Gerenciamento-de-Vendas-AW)
+
+2 - Requisitos de Negócios e Necessidades do Cliente
+----------------------------------------------------
+
+Os requisitos de negócio e necessidade do cliente foram estabelecidas pelo Gerente de Vendas. Baseado nas exigências do colaborador foi gerada a tabela abaixo que contêm os critérios de aceitação e detalhes para produção do painel.
+
+| **No #** | **Cargo** | **Demanda** | **Objetivo** | **Critério de Aceitação** |
+| **1** | Gerente de Vendas | Produzir painel com visão geral das vendas pela internet | Melhorar o acompanhamento sobre os melhores clientes e produtos | Um relatório que se atualiza diariamente |
+| **2** | Representante de Vendas | Visão detalhada das vendas pela internet por cliente | Monitorar os clientes que mais compram e para quem é possível vender mais | Um painel que permita filtrar por cliente |
+| **3** | Representante de Vendas | Visão detalhada das vendas pela internet por produto | Monitorar os produtos com alto desempenho em vendas | Um painel que permita filtrar por produto (categoria e subcategoria) |
+| **4** | Gerente de Vendas | Produzir painel com visão geral das vendas pela internet | Monitorar as vendas e orçamento ao longo do tempo | Um gráfico e um KPI que compare as vendas e orçamento ao longo do tempo |
+
+Tabela 2.1 - Requisitos de Negócio e do Cliente
+
+3 - Limpeza e Transformação dos Dados (SQL)
+-------------------------------------------
+
+Nessa etapa utilizei o SQL Server para acessar o DW e obter os dados necessarios para a produção do painel. Lembrando que os dados referente ao orçamento de venda estavam presente em uma planilha de Excel.
+
+Abaixo é possível verificar os scripts criados para a extração e limpeza dos dados necessários. Algumas colunas foram deixadas como comentários para facilitar a inserção no modelo em futuras expansões ou melhoria nos relatórios.
+
+* * * * *
+
+**DIM_Calendar:**
+-----------------
+
+```
 -- Cleansed DIM_Date Table --
-SELECT 
-  [DateKey], 
-  [FullDateAlternateKey] AS Date, 
-  [EnglishDayNameOfWeek] AS Day, 
-  Left([EnglishMonthName], 3) AS MonthShort,
-  [MonthNumberOfYear] AS MonthNo, 
-  [CalendarQuarter] AS Quarter, 
-  [CalendarYear] AS Year
-FROM 
+SELECT
+  [DateKey],
+  [FullDateAlternateKey] AS Date,
+  --[DayNumberOfWeek],
+  [EnglishDayNameOfWeek] AS Day,
+  --[SpanishDayNameOfWeek],
+  --[FrenchDayNameOfWeek],
+  --[DayNumberOfMonth],
+  --[DayNumberOfYear],
+  --[WeekNumberOfYear],
+  [EnglishMonthName] AS Month,
+  Left([EnglishMonthName], 3) AS MonthShort,   -- Useful for front end date navigation and front end graphs.
+  --[SpanishMonthName],
+  --[FrenchMonthName],
+  [MonthNumberOfYear] AS MonthNo,
+  [CalendarQuarter] AS Quarter,
+  [CalendarYear] AS Year --[CalendarSemester],
+  --[FiscalQuarter],
+  --[FiscalYear],
+  --[FiscalSemester]
+FROM
  [AdventureWorksDW2019].[dbo].[DimDate]
-WHERE 
+WHERE
   CalendarYear >= 2019
-DIM_Customers:
-sql
-Copy code
+```
+
+**DIM_Customers**:
+------------------
+
+```
 -- Cleansed DIM_Customers Table --
-SELECT 
-  c.customerkey AS CustomerKey, 
-  c.firstname AS [First Name], 
-  c.lastname AS [Last Name], 
-  c.firstname + ' ' + lastname AS [Full Name], 
+SELECT
+  c.customerkey AS CustomerKey,
+  --      ,[GeographyKey]
+  --      ,[CustomerAlternateKey]
+  --      ,[Title]
+  c.firstname AS [First Name],
+  --      ,[MiddleName]
+  c.lastname AS [Last Name],
+  c.firstname + ' ' + lastname AS [Full Name],
+  -- Combined First and Last Name
+  --      ,[NameStyle]
+  --      ,[BirthDate]
+  --      ,[MaritalStatus]
+  --      ,[Suffix]
   CASE c.gender WHEN 'M' THEN 'Male' WHEN 'F' THEN 'Female' END AS Gender,
-  c.datefirstpurchase AS DateFirstPurchase, 
-  g.city AS [Customer City]
-FROM 
+  --      ,[EmailAddress]
+  --      ,[YearlyIncome]
+  --      ,[TotalChildren]
+  --      ,[NumberChildrenAtHome]
+  --      ,[EnglishEducation]
+  --      ,[SpanishEducation]
+  --      ,[FrenchEducation]
+  --      ,[EnglishOccupation]
+  --      ,[SpanishOccupation]
+  --      ,[FrenchOccupation]
+  --      ,[HouseOwnerFlag]
+  --      ,[NumberCarsOwned]
+  --      ,[AddressLine1]
+  --      ,[AddressLine2]
+  --      ,[Phone]
+  c.datefirstpurchase AS DateFirstPurchase,
+  --      ,[CommuteDistance]
+  g.city AS [Customer City] -- Joined in Customer City from Geography Table
+FROM
   [AdventureWorksDW2019].[dbo].[DimCustomer] as c
-  LEFT JOIN dbo.dimgeography AS g ON g.geographykey = c.geographykey 
-ORDER BY 
-  CustomerKey ASC
-DIM_Products:
-sql
-Copy code
+  LEFT JOIN dbo.dimgeography AS g ON g.geographykey = c.geographykey
+ORDER BY
+  CustomerKey ASC -- Ordered List by CustomerKey
+```
+
+**DIM_Products:**
+-----------------
+
+```
 -- Cleansed DIM_Products Table --
-SELECT 
-  p.[ProductKey], 
-  p.[ProductAlternateKey] AS ProductItemCode, 
-  p.[EnglishProductName] AS [Product Name], 
-  ps.EnglishProductSubcategoryName AS [Sub Category],
-  pc.EnglishProductCategoryName AS [Product Category], 
-  p.[Color] AS [Product Color], 
-  p.[Size] AS [Product Size], 
-  p.[ProductLine] AS [Product Line], 
-  p.[ModelName] AS [Product Model Name], 
-  p.[EnglishDescription] AS [Product Description], 
-  ISNULL (p.Status, 'Outdated') AS [Product Status] 
-FROM 
+SELECT
+  p.[ProductKey],
+  p.[ProductAlternateKey] AS ProductItemCode,
+  --      ,[ProductSubcategoryKey],
+  --      ,[WeightUnitMeasureCode]
+  --      ,[SizeUnitMeasureCode]
+  p.[EnglishProductName] AS [Product Name],
+  ps.EnglishProductSubcategoryName AS [Sub Category], -- Joined in from Sub Category Table
+  pc.EnglishProductCategoryName AS [Product Category], -- Joined in from Category Table
+  --      ,[SpanishProductName]
+  --      ,[FrenchProductName]
+  --      ,[StandardCost]
+  --      ,[FinishedGoodsFlag]
+  p.[Color] AS [Product Color],
+  --      ,[SafetyStockLevel]
+  --      ,[ReorderPoint]
+  --      ,[ListPrice]
+  p.[Size] AS [Product Size],
+  --      ,[SizeRange]
+  --      ,[Weight]
+  --      ,[DaysToManufacture]
+  p.[ProductLine] AS [Product Line],
+  --     ,[DealerPrice]
+  --      ,[Class]
+  --      ,[Style]
+  p.[ModelName] AS [Product Model Name],
+  --      ,[LargePhoto]
+  p.[EnglishDescription] AS [Product Description],
+  --      ,[FrenchDescription]
+  --      ,[ChineseDescription]
+  --      ,[ArabicDescription]
+  --      ,[HebrewDescription]
+  --      ,[ThaiDescription]
+  --      ,[GermanDescription]
+  --      ,[JapaneseDescription]
+  --      ,[TurkishDescription]
+  --      ,[StartDate],
+  --      ,[EndDate],
+  ISNULL (p.Status, 'Outdated') AS [Product Status]
+FROM
   [AdventureWorksDW2019].[dbo].[DimProduct] as p
-  LEFT JOIN dbo.DimProductSubcategory AS ps ON ps.ProductSubcategoryKey = p.ProductSubcategoryKey 
-  LEFT JOIN dbo.DimProductCategory AS pc ON ps.ProductCategoryKey = pc.ProductCategoryKey 
-ORDER BY 
-  p.ProductKey ASC
-FACT_InternetSales:
-sql
-Copy code
+  LEFT JOIN dbo.DimProductSubcategory AS ps ON ps.ProductSubcategoryKey = p.ProductSubcategoryKey
+  LEFT JOIN dbo.DimProductCategory AS pc ON ps.ProductCategoryKey = pc.ProductCategoryKey
+order by
+  p.ProductKey asc
+```
+
+**FACT_InternetSales:**
+-----------------------
+
+```
 -- Cleansed FACT_InternetSales Table --
-SELECT 
-  [ProductKey], 
-  [OrderDateKey], 
-  [DueDateKey], 
-  [ShipDateKey], 
-  [CustomerKey], 
-  [SalesOrderNumber], 
-  [SalesAmount] 
-FROM 
+SELECT
+  [ProductKey],
+  [OrderDateKey],
+  [DueDateKey],
+  [ShipDateKey],
+  [CustomerKey],
+  --  ,[PromotionKey]
+  --  ,[CurrencyKey]
+  --  ,[SalesTerritoryKey]
+  [SalesOrderNumber],
+  --  [SalesOrderLineNumber],
+  --  ,[RevisionNumber]
+  --  ,[OrderQuantity],
+  --  ,[UnitPrice],
+  --  ,[ExtendedAmount]
+  --  ,[UnitPriceDiscountPct]
+  --  ,[DiscountAmount]
+  --  ,[ProductStandardCost]
+  --  ,[TotalProductCost]
+  [SalesAmount] --  ,[TaxAmt]
+  --  ,[Freight]
+  --  ,[CarrierTrackingNumber]
+  --  ,[CustomerPONumber]
+  --  ,[OrderDate]
+  --  ,[DueDate]
+  --  ,[ShipDate]
+FROM
   [AdventureWorksDW2019].[dbo].[FactInternetSales]
-WHERE 
-  LEFT (OrderDateKey, 4) >= YEAR(GETDATE()) - 2
+WHERE
+  LEFT (OrderDateKey, 4) >= YEAR(GETDATE()) -2 -- Ensures we always only bring two years of date from extraction.
 ORDER BY
   OrderDateKey ASC
-4 - Data Modeling
-Data modeling was performed after the cleaning and importing of tables into Power BI. The figure below shows how the FACT_Budget table was connected to the FACT_InternetSales table, as well as the other Dimension Tables.
+```
 
-Data Model
+4 - Modelagem dos Dados
+-----------------------
 
-5 - Sales Management Dashboard
-A dashboard containing an overview of Adventure Works' internet sales was delivered as a product. Two additional dashboards were added to provide more information and details about sales by customer and/or product.
+Foi realizada a modelagem dos dados após a limpeza e importação das tabelas para o PowerBI. Na figura abaixo é possível verificar como a tabela FACT_Budget foi conectada a tabela FACT_InternetSales assim como as demais Tabelas Dimensão.
 
-Sales Management Dashboards
+![](https://phscala.files.wordpress.com/2021/07/data_model-3.png?w=1024)
 
-The Power BI file containing the produced dashboards is available on my GitHub.
-](https://phscala.files.wordpress.com/2021/07/sales-overview-1.png)https://phscala.files.wordpress.com/2021/07/sales-overview-1.png
+Figura 4.1 - Modelo dos Dados
+
+5 - Painel de Gerenciamento de Vendas
+-------------------------------------
+
+Como produto foi entregue uma Painel contendo uma visão geral das vendas via internet da Adventure Works. Foram adicionados outros dois painéis para fornecer mais informações e detalhes sobre as vendas por cliente e/ou produto.
+
+![](https://phscala.files.wordpress.com/2021/07/sales-overview-2.png?w=1024)
+
+Figura 5.1 - Painéis para Gerenciamento das Vendas Online
+
+![](https://phscala.files.wordpress.com/2021/07/customer_details.png?w=1024)
+
+![](https://phscala.files.wordpress.com/2021/07/porduct_details.png?w=1024)
+
+O arquivo do Power BI contendo os painéis produzidos está disponível no meu [Github.](https://github.com/PedroScala/Projeto-de-Gerenciamento-de-Vendas-AW)
