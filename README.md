@@ -1,13 +1,9 @@
 Data Analysis Project - Sales Management
 -----------------------------------------------------
 
-![Sales Overview](https://phscala.files.wordpress.com/2021/07/sales-overview-1.png?w=600)
+![Sales Overview](https://phscala.files.wordpress.com/2021/07/sales-overview-1.png?w=400) ![Data Model](https://phscala.files.wordpress.com/2021/07/data_model-2.png?w=400)
 
-![Data Model](https://phscala.files.wordpress.com/2021/07/data_model-2.png?w=600)
-
-![Dim Customer CSV Excel](https://phscala.files.wordpress.com/2021/07/dim-customer-csv-excel-2.png?w=600)
-
-![SQL Calendar Project](https://phscala.files.wordpress.com/2021/07/sql-calendar-project-1-2.png?w=600)
+![Dim Customer CSV Excel](https://phscala.files.wordpress.com/2021/07/dim-customer-csv-excel-2.png?w=400) ![SQL Calendar Project](https://phscala.files.wordpress.com/2021/07/sql-calendar-project-1-2.png?w=400)
 
 
 1 - Introduction & Setup
