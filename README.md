@@ -213,7 +213,7 @@ ORDER BY
 
 Data modeling was performed after cleaning and importing the tables into PowerBI. In the figure below, you can see how the FACT_Budget table was connected to the FACT_InternetSales table, as well as the other Dimension Tables.
 
-![Data Model](https://phscala.files.wordpress.com/2021/07/data_model-3.png?w=1024)
+![Data Model](https://phscala.files.wordpress.com/2021/07/data_model-3.png?w=400)
 
 **Figure 4.1 - Data Model**
 
@@ -221,12 +221,13 @@ Data modeling was performed after cleaning and importing the tables into PowerBI
 
 A dashboard containing an overview of Adventure Works internet sales was delivered as a product. Two additional dashboards were added to provide more information and details about sales by customer and/or product.
 
-![Sales Overview](https://phscala.files.wordpress.com/2021/07/sales-overview-2.png?w=1024)
+![Sales Overview](https://phscala.files.wordpress.com/2021/07/sales-overview-2.png?w=400)
 
 **Figure 5.1 - Dashboards for Online Sales Management**
 
-![Customer Details](https://phscala.files.wordpress.com/2021/07/customer_details.png?w=1024)
-
-![Product Details](https://phscala.files.wordpress.com/2021/07/porduct_details.png?w=1024)
+<p float="left">
+  <img src="https://phscala.files.wordpress.com/2021/07/customer_details.png?w=600" />
+  <img src="https://phscala.files.wordpress.com/2021/07/porduct_details.png?w=600" />
+</p>
 
 The Power BI file containing the produced dashboards is available on [my GitHub.](https://github.com/PedroScala/Projeto-de-Gerenciamento-de-Vendas-AW)
