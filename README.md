@@ -1,4 +1,4 @@
-Data Analysis Project - Sales Management
+[Data Analysis Project - Sales Management
 1 - Introduction & Setup
 Adventure Works is a fictional company, a large multinational manufacturing company that produces and distributes bicycles, bike parts, and accessories. It operates in the North American, European, and Asian markets and has 500 employees. Adventure Works has various sales groups.
 
@@ -105,3 +105,4 @@ A dashboard containing an overview of Adventure Works' internet sales was delive
 Sales Management Dashboards
 
 The Power BI file containing the produced dashboards is available on my GitHub.
+](https://phscala.files.wordpress.com/2021/07/sales-overview-1.png)https://phscala.files.wordpress.com/2021/07/sales-overview-1.png
